@@ -23,6 +23,6 @@ spec:
     spec:
       containers:
         - name: backend
-          image: your-dockerhub-user/movie-backend:v2
+          image: bsajmera/backend:v1
           ports:
             - containerPort: 8000
