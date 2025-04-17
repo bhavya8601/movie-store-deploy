@@ -23,6 +23,6 @@ spec:
     spec:
       containers:
       - name: backend
-        image: YOUR_BACKEND_IMAGE:v2
+        image: bsajmera/backend:v5
         ports:
         - containerPort: 8000
