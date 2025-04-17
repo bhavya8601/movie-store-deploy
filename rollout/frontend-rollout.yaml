@@ -26,6 +26,6 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: YOUR_FRONTEND_IMAGE:v2
+        image: bsajmera/frontend:v6
         ports:
         - containerPort: 8511
