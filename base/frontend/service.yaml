@@ -3,16 +3,18 @@ kind: Service
 metadata:
   name: movie-frontend
   namespace: movie-store
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/path: /metrics
+    prometheus.io/port: "8511"
 spec:
   selector:
     app: movie-frontend
   type: LoadBalancer
   ports:
-    - name: ui
-      protocol: TCP
-      port: 80            # External port for UI
-      targetPort: 8501    # Internal UI port
-    - name: metrics
-      protocol: TCP
-      port: 8511          # Expose metrics port directly
-      targetPort: 8511    # Internal metrics port
+    - protocol: TCP
+      port: 80
+      targetPort: 8501    # Port for the UI
+    - protocol: TCP
+      port: 8511
+      targetPort: 8511    # Port for Prometheus metrics
