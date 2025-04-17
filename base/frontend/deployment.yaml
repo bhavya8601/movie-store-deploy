@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: bsajmera/frontend:v3
+          image: bsajmera/frontend:v5
           ports:
             - containerPort: 8501
           env:
