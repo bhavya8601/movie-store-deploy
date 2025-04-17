@@ -1,2 +1,4 @@
   resources:
   - prometheus-analysis-templates.yaml
+  - bluegreen-analysis-template.yaml
+  - canary-analysis-template.yaml
