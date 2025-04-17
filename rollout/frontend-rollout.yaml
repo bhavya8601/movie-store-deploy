@@ -2,8 +2,20 @@ apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
   name: movie-frontend
+  namespace: movie-store
 spec:
-  replicas: 2
+  replicas: 3
+  strategy:
+    canary:
+      steps:
+      - setWeight: 20
+      - pause: { duration: 300 }
+      - analysis:
+          templates:
+          - templateName: success-rate-template
+      - setWeight: 60
+      - pause: { duration: 300 }
+      - setWeight: 100
   selector:
     matchLabels:
       app: movie-frontend
@@ -13,17 +25,7 @@ spec:
         app: movie-frontend
     spec:
       containers:
-        - name: frontend
-          image: bsajmera/frontend:v6
-          ports:
-            - containerPort: 8501
-          env:
-            - name: BACKEND_URL
-              value: "http://movie-backend:8000"
-  strategy:
-    canary:
-      steps:
-        - setWeight: 50
-        - pause: { duration: 30s }
-        - setWeight: 100
-        - pause: { duration: 30s }
+      - name: frontend
+        image: YOUR_FRONTEND_IMAGE:v2
+        ports:
+        - containerPort: 8511
