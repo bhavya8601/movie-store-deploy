@@ -2,4 +2,4 @@ resources:
   - base/backend
   - base/frontend
   - rollout
-  - analysis/
+  - analysis
