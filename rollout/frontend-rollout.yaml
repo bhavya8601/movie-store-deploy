@@ -12,7 +12,7 @@ spec:
       - pause: { duration: 300 }
       - analysis:
           templates:
-          - templateName: success-rate-template
+          - templateName: frontend-4xx-error-rate
       - setWeight: 60
       - pause: { duration: 300 }
       - setWeight: 100
