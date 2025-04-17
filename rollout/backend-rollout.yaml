@@ -12,7 +12,7 @@ spec:
       autoPromotionEnabled: false
       prePromotionAnalysis:
         templates:
-        - templateName: success-rate-template
+        - templateName: canary-analysis-template
   selector:
     matchLabels:
       app: movie-backend
