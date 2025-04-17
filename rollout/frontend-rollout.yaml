@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: movie-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: movie-frontend
+  template:
+    metadata:
+      labels:
+        app: movie-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: your-dockerhub-username/movie-frontend:latest
+          ports:
+            - containerPort: 8501
+          env:
+            - name: BACKEND_URL
+              value: "http://movie-backend:8000"
+  strategy:
+    canary:
+      steps:
+        - setWeight: 50
+        - pause: { duration: 30s }
+        - setWeight: 100
+        - pause: { duration: 30s }
