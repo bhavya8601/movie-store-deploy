@@ -12,7 +12,7 @@ spec:
       - pause: { duration: 300 }
       - analysis:
           templates:
-          - templateName: frontend-4xx-error-rate
+          - templateName: canary-analysis-template
       - setWeight: 60
       - pause: { duration: 300 }
       - setWeight: 100
