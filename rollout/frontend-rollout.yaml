@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: your-dockerhub-username/movie-frontend:latest
+          image: bsajmera/frontend:v2
           ports:
             - containerPort: 8501
           env:
