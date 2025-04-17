@@ -12,7 +12,7 @@ spec:
       autoPromotionEnabled: false
       prePromotionAnalysis:
         templates:
-        - templateName: canary-analysis-template
+        - templateName: bluegreen-analysis-template
   selector:
     matchLabels:
       app: movie-backend
