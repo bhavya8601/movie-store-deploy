@@ -12,9 +12,11 @@ spec:
     app: movie-frontend
   type: LoadBalancer
   ports:
-    - protocol: TCP
+    - name: http-ui
+      protocol: TCP
       port: 80
-      targetPort: 8501    # Port for the UI
-    - protocol: TCP
+      targetPort: 8501
+    - name: http-metrics
+      protocol: TCP
       port: 8511
-      targetPort: 8511    # Port for Prometheus metrics
+      targetPort: 8511
