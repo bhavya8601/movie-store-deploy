@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: bluegreen-analysis-template
+spec:
+  metrics:
+    - name: backend-success-rate
+      interval: 30s
+      count: 3
+      successCondition: result[0] > 0.98
+      failureLimit: 1
+      provider:
+        prometheus:
+          address: http://my-prometheus-server.monitoring.svc.cluster.local
+          query: |
+            sum(rate(http_requests_total{job="movie-store-backend",status=~"2.."}[1m])) /
+            sum(rate(http_requests_total{job="movie-store-backend"}[1m]))
+
+    - name: backend-cpu-usage
+      interval: 30s
+      count: 3
+      successCondition: result[0] < 0.8  # < 80% CPU usage
+      failureLimit: 1
+      provider:
+        prometheus:
+          address: http://my-prometheus-server.monitoring.svc.cluster.local
+          query: |
+            rate(container_cpu_usage_seconds_total{job="movie-store-backend",container!="",pod!=""}[1m])
