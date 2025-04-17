@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: canary-analysis-template
+spec:
+  metrics:
+    - name: frontend-4xx-error-rate
+      interval: 30s
+      count: 3
+      successCondition: result[0] < 0.05  # Less than 5% client errors
+      failureLimit: 1
+      provider:
+        prometheus:
+          address: http://my-prometheus-server.monitoring.svc.cluster.local
+          query: |
+            sum(rate(http_requests_total{job="movie-store-frontend",status=~"4.."}[1m])) /
+            sum(rate(http_requests_total{job="movie-store-frontend"}[1m]))
+
+    - name: frontend-p99-latency
+      interval: 30s
+      count: 3
+      successCondition: result[0] < 0.7  # < 700ms
+      failureLimit: 1
+      provider:
+        prometheus:
+          address: http://my-prometheus-server.monitoring.svc.cluster.local
+          query: |
+            histogram_quantile(0.99, sum(rate(http_request_duration_seconds_bucket{job="movie-store-frontend"}[1m])) by (le))
