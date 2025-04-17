@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/your-github-username/movie-store-deploy.git
+    repoURL: https://github.com/bhavya8601/movie-store-deploy.git
     targetRevision: HEAD
     path: rollout
   destination:
