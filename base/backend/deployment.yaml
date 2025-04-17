@@ -20,18 +20,3 @@ spec:
           image: bsajmera/backend:v1
           ports:
             - containerPort: 8000
-
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: movie-backend
-  namespace: movie-store
-spec:
-  selector:
-    app: movie-backend
-  ports:
-    - protocol: TCP
-      port: 8000
-      targetPort: 8000
